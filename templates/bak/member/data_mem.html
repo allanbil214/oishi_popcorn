@@ -1,0 +1,74 @@
+{% include 'dashboard/header.html' %}
+<section class="vh-100">
+  <body>
+    <div class="content-wrapper pt-5">
+      <section class="content-header pt-3">
+        <div class="container-fluid">
+          <div class="p-3 bg-secondary text-white rounded">
+            <h2>Member Data</h2>
+            <p>This is the data for our Member in Oishi! Popcorn</p>    
+          </div>  
+        </div>
+    </div>
+      <div class="content-wrapper">
+        <section class="content">
+          <div class="container-fluid">   
+            <div class="row">
+              <div class="col">
+                <a href="/add_mem" class="mt-2 mb-2 ms-2 btn btn-success"><span>+ | Add</span></a>			
+                <table class="table table-striped table-bordered table-hover">
+                  <thead>
+                    <tr class="table-primary">
+                      <th scope="col">#</th>
+                      <th scope="col">Full Name</th>
+                      <th scope="col">Birth Place</th>
+                      <th scope="col">Birth Date</th>
+                      <th scope="col">Gender</th>
+                      <th scope="col">Address</th>
+                      <th scope="col">Username</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                          {% for data in dMem %}
+                      <tr>
+                          <th scope="row">{{ data.0 }}</th>
+                          <td>{{ data.1 }}</td>
+                          <td>{{ data.2 }}</td>
+                          <td>{{ data.3 }}</td>
+                          <td>{{ data.4 }}</td>
+                          <td>{{ data.5 }}</td>
+                          <td>{{ data.6 }}</td>
+                          <td>
+                            <div class="row">
+                              <div class="col-sm-2">
+                                <form action="{{ url_for('sayonara_mem') }}" method="post">
+                                  <input type="hidden" value="{{ data.0 }}"name="del_this"/>
+                                  <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>  
+                              </div>
+                              <div class="col-sm-1 ps-4">
+                                <form action="{{ url_for('edit_mem') }}" method="post">
+                                  <input type="hidden" value="{{ data.0 }}"name="edit_this" >
+                                  <button type="submit" class="btn btn-warning">Edit</button>
+                                </form>  
+                              </div>
+                            </div>                     
+                          </td>
+                      </tr>
+                          {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      {% for message in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong>{{ message }}</strong>
+    </div>
+  {% endfor %}
+</section>
+{% include 'dashboard/footer.html' %}

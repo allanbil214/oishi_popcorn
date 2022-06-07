@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Most Oishiest Popcorn in Universe</title>
+  <meta charset="utf-8">
+  <meta id="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script>
+    // kode delete
+    $(document).ready(function(){
+      $(".btnDel").click(function(){
+        if(confirm("Are you sure you want to delete this?")){
+          let id = $(this).closest('tr').find('.id').text();
+          $.ajax({
+            contentType: 'application/json',
+            url:"/sayonara/" + id,
+            type:"delete",
+            success: function(){  
+              location.reload()
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+              location.reload()
+            }   
+          });        }
+        else{
+            return false;
+        }
+        e.preventDefault();   
+      });
+    });
+
+    $(document).ready(function(){
+      $(".btnShow").click(function(){
+        let id = $(this).closest('tr').find('.id').text();
+        window.location.href = "http://127.0.0.1:5000/detail_video/"+ id; 
+        e.preventDefault();   
+      });
+    });
+
+    $(document).ready(function(){
+      $(".btnEdit").click(function(){
+        let id = $(this).closest('tr').find('.id').text();
+        window.location.href = "http://127.0.0.1:5000/edit_video/"+ id; 
+        e.preventDefault();   
+      });
+    });
+  </script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="/auth">Oishi! Popcorn</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/data_emp">Data Employee</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/show_video">Data Film</a>
+      </li>
+    </ul>
+  </div>
+</nav>

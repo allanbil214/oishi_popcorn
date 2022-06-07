@@ -1,0 +1,59 @@
+{% include 'user/header.html' %}
+<style>
+.max-lines   {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+           line-clamp: 2; 
+   -webkit-box-orient: vertical;
+}
+</style>
+    <div class="container">
+      <div class="text-center">  
+        <h1 class="text-center pb-5">Searched Movies</h1>
+        <div class="row">
+        {% for x in movdata %}
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card mb-4">
+                <a href="/viewmovie/{{x.0}}" methods="post">
+                        <div class="card-img-top id_{{x.0}}"
+                            style="background: url('static/img/{{x.8}}'); background-repeat:no-repeat; background-size: cover; height:450px; width:100% "></div>
+                </a>
+                <div class="card-body">
+                    <h5><a class="card-title" href="">{{ x.1}}</a></h5>
+                    <h4 class="max-lines">{{x.7}}</h4>
+                    <span class="text-warning"></span>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+          {%endfor%}
+        </div> 
+      </div>
+      <div class="text-center">  
+        <h1 class="text-center pb-5">Searched TV-Series</h1>
+        <div class="row">
+        {% for x in tvdata %}
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card mb-4">
+              <a href="/viewtv/{{x.0}}" methods="post">
+                <div class="card-img-top id_{{x.0}}"
+                            style="background: url('static/img/{{x.8}}'); background-repeat:no-repeat; background-size: cover; height:450px; width:100% "></div>
+                </a>
+                <div class="card-body">
+                    <h5><a class="card-title" href="">{{ x.1}}</a></h5>
+                    <h4 class="max-lines">{{x.7}}</h4>
+                    <span class="text-warning"></span>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+          {%endfor%}
+        </div> 
+      </div>
+
+    </div>
+
+     
+{% include 'user/footer.html' %}

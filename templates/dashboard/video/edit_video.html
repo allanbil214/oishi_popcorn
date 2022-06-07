@@ -1,0 +1,148 @@
+{% include 'dashboard/header.html' %}
+<section class="vh-100">
+  <div class="content-wrapper pt-5">
+    <section class="content-header pt-3">
+      <div class="container-fluid">
+        <div class="p-3 bg-secondary text-white rounded">
+          <h2>Film Data</h2>
+          <p>This is the data for our Film in Oishi! Popcorn</p>    
+        </div> 
+      </div>
+  </div>
+  <div class="content-wrapper">
+  <section class="content">
+  <div class="container-fluid">   
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-secondary">
+        <div class="card-header">
+          <h3 class="card-title">Edit Film</h3>
+        </div>
+        {% for data in pData %}
+        <form role="form" enctype=multipart/form-data action="/ganti_video" method="POST">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="fs-5">ID</label>
+                  <input type="number" class="form-control" 
+                  name="txtid" value="{{ data.0 }}" placeholder="Enter the id" disabled>
+                  <input type="hidden" name="hidid" value="{{ data.0 }}" >
+                </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <label class="fs-5">Film Name</label>
+                  <input type="text" class="form-control" 
+                  name="txtName" value="{{ data.1 }}" placeholder="Enter the Film name" required>
+                </div>
+              </div>
+            </div> 
+            <div class="row pt-2 pb-2">
+                <label class="fs-5">Genre</label>
+                <div class="form-group pb-2 pt-2">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div class="form-check">
+                        <input class="form-check-input" 
+                        type="checkbox" value="Action" name="genre"
+                        {{ "checked" if "Action" in data.2 }}>
+                        <label class="form-check-label" >
+                          Action
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" 
+                        type="checkbox" value="Horror" name="genre"
+                        {{ "checked" if "Horror" in data.2 }}>
+                        <label class="form-check-label" >
+                          Horror
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" 
+                        type="checkbox" value="Comedy" name="genre"
+                        {{ "checked" if "Comedy" in data.2 }}>
+                        <label class="form-check-label" >
+                          Comedy
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-check">
+                        <input class="form-check-input" 
+                        type="checkbox" value="Mystery" name="genre"
+                        {{ "checked" if "Mystery" in data.2 }}>
+                        <label class="form-check-label" >
+                          Mystery
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" 
+                        type="checkbox" value="Sci-Fi" name="genre"
+                        {{ "checked" if "Sci-Fi" in data.2 }}>
+                        <label class="form-check-label" >
+                          Sci-Fi
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>                  
+            <div class="row pb-2">
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label class="fs-5">Directed By</label>
+                  <input type="text" class="form-control" 
+                  name="txtDirector" value="{{data.4}}" placeholder="Enter the Director's Name" required>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label class="fs-5">Types</label>
+                  <select class="form-select" name="txtType">
+                    <option name="txtType" {{ "selected" if "Movie" in data.9 }} value="1">Movie</option>
+                    <option name="txtType" {{ "selected" if "Series" in data.9 }} value="2">Series</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label class="fs-5">Episodes</label>
+                  <input type="number" class="form-control" 
+                  name="txtEps" value="{{data.5}}" placeholder="Enter the Episodes">
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label class="fs-5">Release Date</label>
+                  <input type="date" class="form-control" 
+                  name="txtRDate" value="{{data.6}}" placeholder="Enter the Release Date" required>
+                </div>
+              </div>
+            </div> 
+             
+            <div class="form-group">
+              <label class="fs-5">Plot</label>
+              <textarea class="form-control" name="txtPlot" 
+              placeholder="Enter the Summary or Plot of the Film" rows="4" required>{{data.7}}</textarea>
+            </div>
+            <div class="row pt-2 pb-2">
+              <div class="form-group">
+                <label class="fs-5 pb-2">Poster</label> <br>
+                <input type="file" value="/static/img/{{data.8}}" required="required" name="picture">
+            </div>
+            </div> 
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-success btn-block">Submit</button>
+            <a href="/data_video" class="btn btn-secondary"><span>Go Back</span></a>
+          </div>
+          {% endfor %}
+        </form>
+      </div>
+    </div>
+  </section>
+  </div>
+</section>
+{% include 'dashboard/footer.html' %}

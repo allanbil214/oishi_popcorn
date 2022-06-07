@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Akihiko Dojo | Login Page</title>
+  <meta charset="utf-8">
+  <meta id="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="/auth">Akihiko Dojo</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/data_emp">Data Employee</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/data_mem">Data Member</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/data_movie">Data Movie</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/data_tv">Data TV-Series</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<section class="vh-100" style="background-color: #61969a;">
+  <div class="container-fluid mt-5 h-100">
+    <div class="row d-flex mt-5 h-100 bg-white">
+      <div class="row mt-4">
+        <div class="col-sm-8">
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">Data Table</h3>
+              
+            </div>      
+            <table class="table table-striped border border-dark">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Full Name</th>
+                  <th>Birth Place</th>
+                  <th>Birth Date</th>
+                  <th>Gender</th>
+                  <th>Address</th>
+                  <th>Username</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="row"></tbody>
+            </table>
+            <script> // script untuk masukin data ke table
+                $.ajax({
+                  type:"GET",
+                  url:"http://127.0.0.1:5000/show_mem",
+                  success: function(result) {
+                    for(var i = 0;i < result.length; i++){
+                      var row = $('<tr><td class="id">' + result[i][0] + 
+                        '</td><td class="name">' + result[i][1] +
+                        '</td><td class="place">' + result[i][2] + 
+                        '</td><td class="date">' + result[i][3] + 
+                        '</td><td class="gender">' + result[i][4] +
+                        '</td><td class="address">' + result[i][5] +
+                        '</td><td class="uname">' + result[i][6] + 
+                        '</td><td>' +
+                          '<a title="Edit" class="btnEdit btn btn-warning me-1">Edit</a>' +
+                          '<a class="btnDelete btn btn-danger" title="Delete">Delete</a>' +                
+                        '</td> <td class="hidden_pwd"> ' + result[i][7] + ' </td></tr>')
+                      $('#row').append(row)
+                      $('td:nth-child(9)').hide();
+                    }
+                  }
+                })
+              </script>
+              
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">Add New Data</h3>
+            </div>
+            <form id="form1" role="form" method="POST">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="fs-5">ID</label>
+                      <input type="number" class="form-control" 
+                      id="txtid" placeholder="Enter the id" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label class="fs-5">Full Name</label>
+                      <input type="text" class="form-control" 
+                      id="txtName" placeholder="Enter the full name" required>
+                    </div>
+                  </div>
+                </div> 
+                <div class="row pt-2 pb-2">
+                  <div class="form-group">
+                    <label class="fs-5">Gender</label>
+                    <select class="form-select" id="gender" id="gender">
+                      <option value="Pria">Pria</option>
+                      <option value="Wanita">Wanita</option>
+                    </select>
+                  </div>
+                </div>                  
+                <div class="row pb-2">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="fs-5">Birth Place</label>
+                      <input type="text" class="form-control" 
+                      id="txtBPlace" placeholder="Enter the Birth Place" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label class="fs-5">Birth Date</label>
+                      <input type="date" class="form-control" 
+                      id="txtBDate" placeholder="Enter the Birth Date" required>
+                    </div>
+                  </div>
+                </div> 
+                <div class="form-group">
+                  <label class="fs-5">Address</label>
+                  <textarea class="form-control" id="txtAddress" 
+                  placeholder="Enter the Address" rows="4" required></textarea>
+                </div>
+                <div class="row pt-2 pb-2">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="fs-5">Username</label>
+                      <input type="username" class="form-control" 
+                      id="txtUname" placeholder="Enter the Username" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="fs-5">Password</label>
+                      <input type="text" class="form-control" 
+                      id="txtPwd" placeholder="Enter the Password" required>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+              <div class="card-footer">
+                <div class="d-grid gap-3">
+                  <button type="submit" id="btnSubmit" class="btn btn-success btn-block">Submit</button>
+                  <button type="submit" id="btnSave" class="btn btn-warning btn-block">Save</button>
+                </div>
+                <div class="btn-group">
+                </div>
+              </div>
+            </form>
+            <script>
+              // dibawah ini kode untuk nambah pake method post
+              $("#btnSubmit").click(function (e){
+                var txtid =$("#txtid").val();
+                var txtname =$("#txtName").val();
+                var txtgender =$("#gender").val();
+                var txtbplace =$("#txtBPlace").val();
+                var txtbdate =$("#txtBDate").val();
+                var txtaddress =$("#txtAddress").val();
+                var txtuname =$("#txtUname").val();
+                var txtpwd =$("#txtPwd").val();
+
+                $.ajax({
+                  contentType: 'application/json',
+                  url:"/addone_mem",
+                  type:"post",
+                  data: JSON.stringify({"id": txtid,
+                  "nama_lengkap": txtname,
+                  "tempat_lahir": txtbplace,
+                  "tanggal_lahir": txtbdate,
+                  "gender": txtgender,
+                  "alamat": txtaddress,
+                  "username": txtuname,
+                  "pwd": txtpwd}),
+                  dataType: 'json',
+                  success: function(){  
+                    location.reload()
+                  },
+                  error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    location.reload()
+                  }   
+                });
+                $("#form1")[0].reset()
+                e.preventDefault();
+              })
+              // dibawah ini kode untuk hapus pake method delete
+              $(document).ready(function() {
+                $('.btnDelete').click(function(){
+                  let id = $(this).closest('tr').find('.id').text();
+                  $.ajax({
+                    contentType: 'application/json',
+                    url:"/sayonara_mem/" + id,
+                    type:"delete",
+                    success: function(){  
+                      location.reload()
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                      location.reload()
+                    }   
+                  });
+                  $("#form1")[0].reset()
+                  e.preventDefault();   
+                });
+              });
+              // dibawah ini kode untuk masukin data ke form
+              $(document).ready(function() {
+                $('.btnEdit').click(function(){
+                  let txtid = $(this).closest('tr').find('.id').text();
+                  let txtname = $(this).closest('tr').find('.name').text();
+                  let txtgender = $(this).closest('tr').find('.gender').text();
+                  let txtbplace = $(this).closest('tr').find('.place').text();
+                  let txtbdate = $(this).closest('tr').find('.date').text();
+                  var event = new Date(txtbdate);
+                      let date = JSON.stringify(event)
+                      converted_date = date.slice(1,11)
+                  let txtaddress = $(this).closest('tr').find('.address').text();
+                  let txtuname = $(this).closest('tr').find('.uname').text();
+                  let txtpwd = $(this).closest('tr').find('.hidden_pwd').text();
+                  $("#txtid").val(txtid)
+                  $("#txtName").val(txtname);
+                  $("#gender").val(txtgender);
+                  $("#txtBPlace").val(txtbplace);
+                  $("#txtBDate").val(converted_date);
+                  $("#txtAddress").val(txtaddress);
+                  $("#txtUname").val(txtuname);
+                  $("#txtPwd").val(txtpwd);
+                  e.preventDefault();   
+                });
+              });
+              // dibawah ini kode untuk edit data pake method put
+              $("#btnSave").click(function (e){
+                var txtid =$("#txtid").val();
+                var txtname =$("#txtName").val();
+                var txtgender =$("#gender").val();
+                var txtbplace =$("#txtBPlace").val();
+                var txtbdate =$("#txtBDate").val();
+                var txtaddress =$("#txtAddress").val();
+                var txtuname =$("#txtUname").val();
+                var txtpwd =$("#txtPwd").val();
+                $.ajax({
+                  contentType: 'application/json',
+                  url:"/ganti_mem",
+                  type:"put",
+                  data: JSON.stringify({"id": txtid,
+                  "nama_lengkap": txtname,
+                  "tempat_lahir": txtbplace,
+                  "tanggal_lahir": txtbdate,
+                  "gender": txtgender,
+                  "alamat": txtaddress,
+                  "username": txtuname,
+                  "pwd": txtpwd}),
+                  dataType: 'json',
+                  success: function(){  
+                    location.reload()
+                  },
+                  error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    location.reload()
+                  }   
+                });
+                $("#form1")[0].reset()
+                e.preventDefault();
+
+              })
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong>{{ message }}</strong>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+<div class="p-4 bg-dark text-white text-center">
+  <p>Footer</p>
+</div>
+
+</body>
+</html>

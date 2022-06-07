@@ -1,0 +1,43 @@
+{% include 'dashboard/header.html' %}
+<section class="vh-100">
+  <div class="content-wrapper pt-5">
+    <section class="content-header pt-3">
+      <div class="container-fluid">
+        <div class="p-3 bg-secondary text-white rounded">
+          <h2>Film Data</h2>
+          <p>This is the data for our Film in Oishi! Popcorn</p>    
+        </div> 
+      </div>
+  </div>
+  <div class="content-wrapper">
+  <section class="content">
+  <div class="container-fluid">   
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-secondary">
+        <div class="card-header">
+          <h3 class="card-title">Detail Film</h3>
+        </div>
+        {% for data in pData %}
+          <div class="card-body">
+            <img src="/static/img/{{data.8}}" style="float: center; width: 10%; height:auto;">
+            <p>
+              ID : {{data.0}} <br>
+              Name : {{data.1}} <br>
+              Genre : {{data.2}} <br> 
+              Director : {{data.4}} <br>
+              Type : {{data.9}} <br>
+              Episodes : {{data.5}} <br>
+              Release Date : {{data.6}} <br>
+              Plot : {{data.7}} <br>
+            </p>
+          <div class="card-footer">
+            <a href="/show_video" class="btn btn-secondary"><span>Go Back</span></a>
+          </div>
+          {% endfor %}
+      </div>
+    </div>
+  </section>
+  </div>
+</section>
+{% include 'dashboard/footer.html' %}

@@ -1,0 +1,96 @@
+{% include 'dashboard/header.html' %}
+<section class="vh-100">
+  <div class="content-wrapper pt-5">
+    <section class="content-header pt-3">
+      <div class="container-fluid">
+        <div class="p-3 bg-secondary text-white rounded">
+          <h2>Employee Data</h2>
+          <p>This is the data for our Employee in Oishi! Popcorn</p>    
+        </div> 
+      </div>
+  </div>
+  <div class="content-wrapper">
+  <section class="content">
+  <div class="container-fluid">   
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-secondary">
+        <div class="card-header">
+          <h3 class="card-title">Add New Employee</h3>
+        </div>
+        <form role="form" action="/addsave_emp" method="POST">
+          <div class="card-body">
+            <div class="row">
+              <!-- <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="fs-5">ID</label>
+                  <input type="number" class="form-control" 
+                  name="txtid" placeholder="Enter the id" required>
+                </div>
+              </div> -->
+              <div class="col">
+                <div class="form-group">
+                  <label class="fs-5">Full Name</label>
+                  <input type="text" class="form-control" 
+                  name="txtName" placeholder="Enter the full name" required>
+                </div>
+              </div>
+            </div> 
+            <div class="row pt-2 pb-2">
+              <div class="form-group">
+                <label class="fs-5">Gender</label>
+                <select class="form-select" name="gender" id="gender">
+                  <option value="Pria">Pria</option>
+                  <option value="Wanita">Wanita</option>
+                </select>
+              </div>
+            </div>                  
+            <div class="row pb-2">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="fs-5">Birth Place</label>
+                  <input type="text" class="form-control" 
+                  name="txtBPlace" placeholder="Enter the Birth Place" required>
+                </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <label class="fs-5">Birth Date</label>
+                  <input type="date" class="form-control" 
+                  name="txtBDate" placeholder="Enter the Birth Date" required>
+                </div>
+              </div>
+            </div> 
+            <div class="form-group">
+              <label class="fs-5">Address</label>
+              <textarea class="form-control" name="txtAddress" 
+              placeholder="Enter the Address" rows="4" required></textarea>
+            </div>
+            <div class="row pt-2 pb-2">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="fs-5">Username</label>
+                  <input type="username" class="form-control" 
+                  name="txtUname" placeholder="Enter the Username" required>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="fs-5">Password</label>
+                  <input type="password" class="form-control" 
+                  name="txtPwd" placeholder="Enter the Password" required>
+                </div>
+              </div>
+            </div> 
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-success btn-block">Submit</button>
+            <a href="/data_emp" class="btn btn-secondary"><span>Go Back</span></a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  </div>
+</section>
+{% include 'dashboard/footer.html' %}
